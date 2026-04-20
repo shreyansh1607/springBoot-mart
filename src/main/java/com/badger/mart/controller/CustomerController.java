@@ -1,5 +1,7 @@
 package com.badger.mart.controller;
 
+import com.badger.mart.dtos.request.CustomerRequest;
+import com.badger.mart.dtos.response.CustomerResponse;
 import com.badger.mart.exception.CustomerNotFoundException;
 import com.badger.mart.model.Customer;
 import com.badger.mart.service.CustomerService;
@@ -19,17 +21,17 @@ public class CustomerController {
     CustomerService customerService;
 
     @PostMapping("/")
-    public ResponseEntity addCustomer(@RequestBody Customer customer){
-        log.info(String.valueOf(customer));
-        Customer addedCustomer = customerService.addCustomer(customer);
-        return new ResponseEntity(addedCustomer , HttpStatus.CREATED);
+    public ResponseEntity addCustomer(@RequestBody CustomerRequest customerRequest){
+        log.info(String.valueOf(customerRequest));
+        CustomerResponse customerResponse = customerService.addCustomer(customerRequest);
+        return new ResponseEntity(customerResponse , HttpStatus.CREATED);
     }
 
     @GetMapping("/")
     public ResponseEntity getCustomer(@RequestParam int id){
         try{
-            Customer customer = customerService.getCustomer(id);
-            return new ResponseEntity<>(customer , HttpStatus.FOUND);
+            CustomerResponse customerResponse = customerService.getCustomer(id);
+            return new ResponseEntity<>(customerResponse , HttpStatus.FOUND);
         }catch (CustomerNotFoundException e){
             return new ResponseEntity(e.getMessage() , HttpStatus.BAD_REQUEST);
         }

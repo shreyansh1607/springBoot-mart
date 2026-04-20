@@ -15,6 +15,7 @@ import org.hibernate.annotations.CreationTimestamp;
 @Entity
 @Getter
 @Setter
+@Builder
 public class Customer {
 
     @Id
