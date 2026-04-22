@@ -20,6 +20,7 @@ import java.util.List;
 public class OrderEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column
@@ -30,5 +31,10 @@ public class OrderEntity {
     private OrderStatus status;
 
     @ManyToMany
+    @JoinTable(
+            name = "order_product",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
     List<Product> products = new ArrayList<>();
 }

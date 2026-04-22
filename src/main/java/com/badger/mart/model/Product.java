@@ -2,10 +2,7 @@ package com.badger.mart.model;
 
 import com.badger.mart.enums.Category;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +12,11 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Product {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column
@@ -37,6 +36,6 @@ public class Product {
     @OneToMany(mappedBy = "product")
     List<Review> reviews = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "products")
     List<OrderEntity> orders = new ArrayList<>();
 }

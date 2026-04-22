@@ -28,6 +28,6 @@ public class Seller {
     @Column
     public String email;
 
-    @OneToMany(mappedBy = "seller")
+    @OneToMany(mappedBy = "seller" , cascade = CascadeType.ALL)
     List<Product> products = new ArrayList<>();
 }
